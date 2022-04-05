@@ -1,0 +1,7 @@
+# docker-composeの設定値
+version: "3.9"
+services:
+  app:
+    build: ./docker/php
+    volumes:
+      - ./src:/data
