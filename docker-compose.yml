@@ -1,10 +1,12 @@
 # docker-composeの設定値
 version: "3.9"
 services:
+  # アプリコンテナ
   app:
     build: ./docker/php
     volumes:
       - ./src:/data
+  # サーバーコンテナ
   web:
     image: nginx:1.20-alpine
     ports:
@@ -13,3 +15,10 @@ services:
       - ./src:/data
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /data
+  # データベースコンテナ
+  db:
+    build: ./docker/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+volumes:
+  db-store:
